@@ -1,0 +1,150 @@
+.template-cart .shoping_cart{
+    text-transform: uppercase;
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-family: interstate !important;
+    letter-spacing: .1em;
+    color: #11354c;
+    line-height: 1.3216;    
+}
+.add_cart_footer{float: right;}
+.cart_template_name{
+    font-size: 20px;
+    line-height: 1.1em;
+    word-wrap: break-word;
+    color: inherit;
+    text-decoration: none;
+}
+.template-cart td{
+    vertical-align: middle;
+}
+.template-cart img{
+    width: 150px;
+    height: 150px;
+    margin-left: 35%;
+    padding: 0;
+}
+.add_cart_footer span{
+    font-size: 16px;
+    text-align: right;
+    line-height: 1.5em;
+    font-family: Times, Times New Roman, serif;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: .01em;
+    text-transform: none;
+    color: #11354c;
+}
+.template_price{
+    font-size: 16px;
+    white-space: nowrap;
+    text-align: right;
+    min-width: 20vw;
+    line-height: 1.5em;
+    font-family: interstate;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: .01em;
+    text-transform: none;
+    color: #11354c;        
+}
+
+.no_items_in_cart span{
+    line-height: 1.5em;
+    font-size: calc((1.1 - 1) * 1.2vw + 1rem);
+    font-family: interstate;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: .01em;
+    text-transform: none;
+    color: #11354c;    
+}
+.no_items_in_cart span a{text-decoration: none;color: lightgreen;}
+
+
+
+
+
+/* checkout css */
+.accordion_checkout {
+    margin: 2px 0 2px 0;
+    width: 30rem;
+}
+
+.payment_qrcode img {
+    height: 160px;
+    width: 160px;
+}
+
+.choose_qr_code:hover {
+    transform: scale(2.5);
+    /* -ms-transform: scale(4.6);
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5); */
+}
+
+.template-cart_place_order {
+    border: 1px solid lightgray;
+    padding: 15px;
+}
+
+.template-cart_place_order .shoping_cart{
+    text-transform: uppercase;
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-family: interstate !important;
+    letter-spacing: .1em;
+    color: #11354c;
+    line-height: 1.3216;    
+    width: 100%;
+}
+
+
+
+
+/* checkout  invoice  */
+@import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
+
+.invoice body {
+    font-family: 'Maven Pro', sans-serif;
+    background-color: #eee
+}
+
+.invoice .card {
+    background-color: #fff;
+    border: none
+}
+
+.invoice .card .upper {
+    padding: 13px
+}
+
+.invoice .fa-check-circle-o {
+    color: blue
+}
+
+
+.dowenload-template img{
+    height: 350px;
+    width: 550px;
+}
+
+.dowenload-template .card-title{
+    font-family: interstate;
+    white-space: nowrap; 
+    width: 95%; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.dowenload-template a{
+    /* margin: 3px 0 0 50%; */
+    position: absolute;
+}
+
+.esewa-form .image{
+    margin-left: 3%;
+    width: 100%;
+    height: 120px;
+}
