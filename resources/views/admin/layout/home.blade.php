@@ -89,7 +89,7 @@
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                             data-accordion="false">
 
-                            @if (Auth::user()->role === 'manager' || Auth::user()->role === 'admin')
+                            @if (Auth::user()->role == 'admin' || Auth::user()->role == 'vendor')
                                 <li class="nav-item menu-open">
                                     <a href="{{ route('admin.dashboard') }}" class="nav-link active">
                                         <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -99,8 +99,8 @@
                                         </p>
                                     </a>
                                 </li>
-
-
+                            @endif
+                            @if (Auth::user()->role === 'manager' || Auth::user()->role === 'admin')
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="nav-icon fas fa-tree"></i>
@@ -241,94 +241,102 @@
                 {{-- begin::User_datatable --}}
                 @yield('content')
 
-                @if (request()->segment('2') == 'dashboard')
-                    @php
-                        $user = \App\Models\User::paginate(15);
-                        $order = \App\Models\UserOrder::all();
-                        $total = \App\Models\UserOrder::pluck('total');
-                    @endphp
-                    <div class="container d-cont">
-                        <div class="row">
-                            <div class="col-4 dashboard ml-5">
-                                <h4>{{ count($user) }}</h4>
-                                <p>All User</p>
+                @if (Auth::user()->role == 'admin')
+                    @if (request()->segment('2') == 'dashboard')
+                        @php
+                            $user = \App\Models\User::paginate(15);
+                            $order = \App\Models\UserOrder::all();
+                            $total = \App\Models\UserOrder::pluck('total');
+                        @endphp
+                        <div class="container d-cont">
+                            <div class="row">
+                                <div class="col-4 dashboard ml-5">
+                                    <h4>{{ count($user) }}</h4>
+                                    <p>All User</p>
+                                </div>
+                                <div class="col-3 dashboard">
+                                    <h4>{{ count($order) }}</h4>
+                                    <p>Total Order</p>
+                                </div>
+                                <div class="col-4 dashboard">
+                                    <?php $input = 0; ?>
+                                    @foreach ($total as $item)
+                                        <?php $input += (int) $item; ?>
+                                    @endforeach
+                                    <h4>Rs {{ $input }}.00</h4>
+                                    <p>Total sells Amount</p>
+                                </div>
                             </div>
-                            <div class="col-3 dashboard">
-                                <h4>{{ count($order) }}</h4>
-                                <p>Total Order</p>
-                            </div>
-                            <div class="col-4 dashboard">
-                                <?php $input = 0; ?>
-                                @foreach ($total as $item)
-                                    <?php $input += (int) $item; ?>
+                        </div>
+
+                        <br>
+
+                        <div class="container">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Roles</th>
+                                    <th style="text-align: center; width: 210px">Change Role | Action</th>
+                                </thead>
+                                @foreach ($user as $key => $data)
+                                    <tbody>
+
+                                        <td>{{ ++$key }}</td>
+                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->email }}</td>
+                                        <td>{{ $data->role }}</td>
+                                        @if (Auth::user()->role == 'admin')
+                                            <td class="d-flex">
+                                                <form action="{{ route('change.role', $data->id) }}" method="GET">
+                                                    <input type="hidden" name="role" value="role">
+                                                    <button class="btn btn-primary ml-2"
+                                                        onclick="javascript:this.form.submit();">Change Role</button>
+                                                </form>
+
+                                                <a href="{{ route('remove.user', $data->id) }}"
+                                                    class="btn btn-danger ml-2"> <i class="fa fa-trash"></i> </a>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <p style="text-align: center; color:red">Permission Denied</p>
+                                            </td>
+                                        @endif
+
+                                    </tbody>
                                 @endforeach
-                                <h4>Rs {{ $input }}.00</h4>
-                                <p>Total sells Amount</p>
+                            </table>
+
+                            <div class="d-flex justify-content-center">
+                                {!! $user->links() !!}
                             </div>
                         </div>
-                    </div>
 
-                    <br>
+                        {{-- @endif --}}
 
-                    <div class="container">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Roles</th>
-                                <th style="text-align: center; width: 210px">Change Role | Action</th>
-                            </thead>
-                            @foreach ($user as $key => $data)
-                                <tbody>
+                        <style>
+                            .dashboard {
+                                background: red;
+                                padding: 10px;
+                                margin: 3px;
+                                border-radius: 3px;
+                            }
 
-                                    <td>{{ ++$key }}</td>
-                                    <td>{{ $data->name }}</td>
-                                    <td>{{ $data->email }}</td>
-                                    <td>{{ $data->role }}</td>
-                                    @if (Auth::user()->role == 'admin')
-                                        <td class="d-flex">
-                                            <form action="{{ route('change.role', $data->id) }}" method="GET">
-                                                <input type="hidden" name="role" value="role">
-                                                <button class="btn btn-primary ml-2"
-                                                    onclick="javascript:this.form.submit();">Change Role</button>
-                                            </form>
+                            .d-cont h4,
+                            p {
+                                color: white;
+                                text-align: center;
+                            }
 
-                                            <a href="{{ route('remove.user', $data->id) }}"
-                                                class="btn btn-danger ml-2"> <i class="fa fa-trash"></i> </a>
-                                        </td>
-                                    @else
-                                        <td>
-                                            <p style="text-align: center; color:red">Permission Denied</p>
-                                        </td>
-                                    @endif
-
-                                </tbody>
-                            @endforeach
-                        </table>
-
-                        <div class="d-flex justify-content-center">
-                            {!! $user->links() !!}
+                        </style>
+                    @endif
+                @elseif(Auth::user()->role == 'vendor')
+                    <div class="row">
+                        <div class="container d-cont">
+                            <h4>Welcome {{ Auth::user()->name }}</h4>
                         </div>
                     </div>
-
-                    {{-- @endif --}}
-
-                    <style>
-                        .dashboard {
-                            background: red;
-                            padding: 10px;
-                            margin: 3px;
-                            border-radius: 3px;
-                        }
-
-                        .d-cont h4,
-                        p {
-                            color: white;
-                            text-align: center;
-                        }
-
-                    </style>
                 @endif
 
                 {{-- end::User_datatable --}}
