@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\UserOrder;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Session;
 
@@ -39,6 +40,7 @@ class ProductController extends Controller
          //Insert Data into DB
         $menu = new Product;
         $menu-> menu_name  = $request->menu_name;
+        $menu-> category  = $request->cat;
         $menu-> description = $request->description;
         $menu-> price = $request->price;
 
@@ -67,7 +69,7 @@ class ProductController extends Controller
     public function prodShow(Product $product)
     {
         $breadcrum = "Menu Item";
-        $items = Product::orderBy('created_at', 'desc')->paginate(1);
+        $items = Product::orderBy('created_at', 'desc')->paginate(15);
         return view('admin.pages.productlist',["menu"=>$items, 'breadcrum'=> $breadcrum]);
     }
 
@@ -95,6 +97,7 @@ class ProductController extends Controller
         //update Data into DB
         $menu = Product::find($request->input('id'));
         $menu-> menu_name  = $request->input('menu_name');
+        $menu-> category  = $request->input('cat');
         $menu-> description  = $request->input('description');
         $menu-> price  = $request->input('price');
 
@@ -172,5 +175,28 @@ class ProductController extends Controller
         \Mail::to($data->email)->send(new \App\Mail\deleveryInfoMail($data));
         return back();
     }
+
+
+
+    //category
+    public function AllCat(){
+        $data = Category::all();
+        return view('admin.pages.createCat', compact('data'));
+    }
+
+    public function StoreCat(Request $request){
+        $data = new Category;
+        $data->cat = $request->cat;
+        $data->save();
+        return back()->with('success','New Category added');
+    }
+
+    public function RemoveCat($id){
+        $data =  Category::find($id);
+        $data->delete();
+        return back()->with('success','Data removed');
+    }
+    
+    
 
 }

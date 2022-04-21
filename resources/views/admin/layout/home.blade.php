@@ -200,6 +200,10 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{route('list.category')}}" class="nav-link"><i class="nav-icon fas fa-th"></i><p>Product Catogery</p></a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{route('show.product')}}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
