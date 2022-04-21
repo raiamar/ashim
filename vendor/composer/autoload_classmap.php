@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\Admin\\VendorRequestController' => $baseDir . '/app/Http/Controllers/Admin/VendorRequestController.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',
@@ -21,6 +22,7 @@ return array(
     'App\\Http\\Controllers\\MainController' => $baseDir . '/app/Http/Controllers/MainController.php',
     'App\\Http\\Controllers\\ProductController' => $baseDir . '/app/Http/Controllers/ProductController.php',
     'App\\Http\\Controllers\\RegController' => $baseDir . '/app/Http/Controllers/RegController.php',
+    'App\\Http\\Controllers\\VendorRequestController' => $baseDir . '/app/Http/Controllers/VendorRequestController.php',
     'App\\Http\\Controllers\\backend\\WelcomeController' => $baseDir . '/app/Http/Controllers/backend/WelcomeController.php',
     'App\\Http\\Controllers\\homeController' => $baseDir . '/app/Http/Controllers/homeController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',

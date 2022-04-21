@@ -17,7 +17,7 @@
             <div class="col-lg-12" style="overflow: auto">
                 <div>
                     <div>
-                        <h3>Order Details</h3>
+                        <h3>Vendor Request Lists</h3>
                     </div>
                     <div class="card-body">
                         <table class="table">
