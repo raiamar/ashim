@@ -2,16 +2,7 @@
 @section('title', 'admin')
 @section('content')
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    @if (Session::get('success'))
-        <div class="alert alert-success">
-            {{ Session::get('success') }}
-        </div>
-    @endif
-    @if (Session::get('fail'))
-        <div class="alert alert-danger">
-            {{ Session::get('fail') }}
-        </div>
-    @endif
+@include('admin.layout.message')
     <div class="conatainer">
         <div class="row">
             <div class="col-lg-12">
@@ -25,6 +16,7 @@
                                 <tr>
                                     <th scope="col">S.N.</th>
                                     <th scope="col">Product Item</th>
+                                    <th scope="col">Category</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Price</th>
                                     <th scope="col">Items</th>
@@ -36,6 +28,7 @@
                                     <tr>
                                         <th scope="row">{{ ++$key}}</th>
                                         <td>{{ $item->menu_name }}</td>
+                                        <td>{{ $item->category }}</td>
                                         <td>{{ $item->description }}</td>
                                         <td>Rs.{{ $item->price }}</td>
                                         <td><img src="{{ asset('uploads/product/' . $item->image) }}" height="100px"

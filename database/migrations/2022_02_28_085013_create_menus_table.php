@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('menu_name');
             $table->string('description');
             $table->biginteger('price');
+            $table->string('category');
             $table->mediumText('image')->nullable();
             $table->timestamps();
         });

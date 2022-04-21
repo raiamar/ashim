@@ -33,7 +33,14 @@ Route::group(['middleware' => 'user_role', 'prefix'=> 'admin'], function(){
     Route::get('pass-order/{id}','ProductController@PassOrder')->name('pass.product');
     Route::any('delete-order/{id}','ProductController@DeleteOrder')->name('delete.item');
     Route::get('track-order/{id}','ProductController@TrackOrder')->name('track.order');
+
+
+    //category
+    Route::post('store-category', 'ProductController@StoreCat')->name('store.category');
+    Route::get('remove-category/{id}', 'ProductController@RemoveCat')->name('remove.category');
+    Route::get('product-category', 'ProductController@AllCat')->name('list.category');
 });
+
 
 
 Route::get('rating/{id}', 'MainController@RateMe')->name('rate.page');

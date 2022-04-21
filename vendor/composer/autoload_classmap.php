@@ -39,6 +39,7 @@ return array(
     'App\\Mail\\sendInvoiceMail' => $baseDir . '/app/Mail/sendInvoiceMail.php',
     'App\\Models\\Admin' => $baseDir . '/app/Models/Admin.php',
     'App\\Models\\Booking' => $baseDir . '/app/Models/Booking.php',
+    'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Inquery' => $baseDir . '/app/Models/Inquery.php',
     'App\\Models\\Inventory' => $baseDir . '/app/Models/Inventory.php',
     'App\\Models\\Logi' => $baseDir . '/app/Models/Logi.php',

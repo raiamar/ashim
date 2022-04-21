@@ -16,6 +16,21 @@
 						  <input type="text" class="form-control" value="{{$item->menu_name}}" name="menu_name" id="" placeholder="Enter Menu Name">
 						</div>
 
+
+						<div class="mb-3">
+							<label for="exampleFormControlInput1" class="form-label">Product Name</label>
+							<select class="form-control" name="cat">
+							
+								<option value="{{$item->category}}">{{$item->category}}</option>
+								<?php $data = App\Models\Category::all(); ?>
+								@foreach($data as $items)
+                                    <option value="{{$items->cat}}">{{$items->cat}}</option>
+								@endforeach
+								
+							</select>
+						</div>
+
+
 						<div class="mb-3">
 						  <label for="" class="form-label">Product Description</label>
 						  <textarea class="form-control" name="description" id="" rows="3">{{$item->description}}</textarea>
