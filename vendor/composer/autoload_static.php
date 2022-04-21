@@ -533,6 +533,7 @@ class ComposerStaticInit612bcc301f0c57667283960e6e6ea501
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\Admin\\VendorRequestController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/VendorRequestController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
@@ -546,6 +547,7 @@ class ComposerStaticInit612bcc301f0c57667283960e6e6ea501
         'App\\Http\\Controllers\\MainController' => __DIR__ . '/../..' . '/app/Http/Controllers/MainController.php',
         'App\\Http\\Controllers\\ProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProductController.php',
         'App\\Http\\Controllers\\RegController' => __DIR__ . '/../..' . '/app/Http/Controllers/RegController.php',
+        'App\\Http\\Controllers\\VendorRequestController' => __DIR__ . '/../..' . '/app/Http/Controllers/VendorRequestController.php',
         'App\\Http\\Controllers\\backend\\WelcomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/backend/WelcomeController.php',
         'App\\Http\\Controllers\\homeController' => __DIR__ . '/../..' . '/app/Http/Controllers/homeController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',

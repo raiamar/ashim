@@ -50,65 +50,10 @@
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="/" class="nav-link">Home</a>
                 </li>
-                {{-- <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li> --}}
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Navbar Search -->
-                {{-- <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li> --}}
-
-
-                <!-- Notifications Dropdown Menu -->
-                {{-- <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li> --}}
-
-
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -129,9 +74,6 @@
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    {{-- <div class="image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div> --}}
                     <div class="info" style="margin:auto">
                         <a href="#" class="d-block" style="text-align: center; text-decoration: none;">
                             <h4>{{ Auth::user()->name }}</h4>
@@ -141,22 +83,11 @@
 
                 <!-- SidebarSearch Form -->
                 <div class="form-inline">
-                    {{-- <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div> --}}
 
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                             data-accordion="false">
-                            <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
 
                             @if (Auth::user()->role === 'manager' || Auth::user()->role === 'admin')
                                 <li class="nav-item menu-open">
@@ -201,20 +132,28 @@
                                         </li>
                                     </ul>
                                 </li>
-                            @endif
-
-                            @if (Auth::user()->role == 'admin')
                                 <li class="nav-item">
-                                    <a href="{{ route('index.product') }}" class="nav-link"><i
+                                    <a href="{{ route('list.category') }}" class="nav-link"><i
                                             class="nav-icon fas fa-th"></i>
-                                        <p>Add Products</p>
+                                        <p>Product Category</p>
                                     </a>
                                 </li>
 
                                 <li class="nav-item">
-                                    <a href="{{ route('list.category') }}" class="nav-link"><i
+                                    <a href="{{ route('admin.get_vendor_request') }}" class="nav-link">
+                                        <i class="nav-icon fas fa-th"></i>
+                                        <p>
+                                            Vendor Request
+                                        </p>
+                                    </a>
+                                </li>
+                            @endif
+
+                            @if (Auth::user()->role == 'vendor')
+                                <li class="nav-item">
+                                    <a href="{{ route('index.product') }}" class="nav-link"><i
                                             class="nav-icon fas fa-th"></i>
-                                        <p>Product Catogery</p>
+                                        <p>Add Products</p>
                                     </a>
                                 </li>
 
@@ -245,18 +184,21 @@
                                         </li>
                                     </ul>
                                 </li>
-
-                                <li class="nav-item">
-                                  <a href="{{ route('admin.get_vendor_request') }}" class="nav-link">
-                                      <i class="nav-icon fas fa-th"></i>
-                                      <p>
-                                          Vendor Request
-                                      </p>
-                                  </a>
-                              </li>
                             @endif
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    {{ __('Logout') }}
+                                </a>
 
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
                         </ul>
+
                     </nav>
                     <!-- /.sidebar-menu -->
                 </div>

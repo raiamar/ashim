@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class RoleMiddleware
 {
@@ -18,7 +18,7 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next)
     {
         
-        if( Auth::user()->role === 'admin' || Auth::user()->role ===  "manager"){
+        if( Auth::user()->role === 'admin' || Auth::user()->role === 'vendor'){
             return $next($request);    
         }
         abort(403);
