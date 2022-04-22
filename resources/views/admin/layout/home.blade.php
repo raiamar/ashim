@@ -14,6 +14,7 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -34,8 +35,11 @@
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
 
+<body class="hold-transition sidebar-mini layout-fixed">
+    @php
+        $notifications = Auth::user()->unreadNotifications;
+    @endphp
     <!--Begin::wrapper -->
     <div class="wrapper">
 
@@ -54,6 +58,23 @@
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <span class="badge badge-warning navbar-badge">{{ $notifications->count() }}</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                        <span class="dropdown-item dropdown-header">{{ $notifications->count() }}
+                            Notifications</span>
+                        <div class="dropdown-divider"></div>
+                        @foreach ($notifications as $notification)
+                            <a href="{{ route('admin.markAsRead', $notification->id) }}" class="dropdown-item">
+                                <i class="fas fa-envelope mr-2"></i>{{ $notification->data['msg'] }}
+                            </a>
+                            <div class="dropdown-divider"></div>
+                        @endforeach
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                         <i class="fas fa-expand-arrows-alt"></i>
@@ -64,6 +85,7 @@
                         <i class="fas fa-th-large"></i>
                     </a>
                 </li>
+
             </ul>
         </nav>
         <!-- /.navbar -->

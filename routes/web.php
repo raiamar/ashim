@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\VendorRequestController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VendorRequestController;
+use Illuminate\Notifications\DatabaseNotification;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
