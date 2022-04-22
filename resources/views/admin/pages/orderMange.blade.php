@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12" style="overflow: auto">
-                <div >
+                <div>
                     <div>
                         <h3>Order Details</h3>
                     </div>
@@ -29,6 +29,7 @@
                                     <th scope="col">Item</th>
                                     <th scope="col">Qty</th>
                                     <th scope="col">Price</th>
+                                    <th scope="col">User</th>
                                     <th scope="col">Total</th>
                                     <th scope="col">Address</th>
                                     <th scope="col">Specefic</th>
@@ -80,6 +81,25 @@
                                                 <hr>
                                             @endforeach
                                         </td>
+                                        <td style="width: 80px">
+                                            @foreach (json_decode($item->details) as $detail)
+                                                @php
+                                                    $temp = explode(',', $detail);
+                                                    if(array_key_exists(4, $temp)){
+                                                        $userid = $temp[4];
+                                                        $userdata = App\Models\User::where('id', $userid);
+                                                        if($userdata->exists()){
+                                                            $user_name = $userdata->first()->name;
+                                                        } else {
+                                                            $user_name = '';
+                                                        }
+                                                    }
+                                                    
+                                                @endphp
+                                                {{ $user_name }}<br>
+                                                <hr>
+                                            @endforeach
+                                        </td>
                                         <td style="vertical-align:middle;">Rs {{ $item->total }}</td>
                                         <td style="vertical-align:middle;">{{ $item->address }}</td>
                                         <td style="vertical-align:middle;">{{ $item->specefics }}</td>
@@ -93,9 +113,9 @@
                                         </td>
                                         <td style="vertical-align:middle;">{{ $item->payment }}</td>
                                         <td style="vertical-align:middle;">
-                                            <form action="{{route('track.order', $item->id)}}" method="GET">
+                                            <form action="{{ route('track.order', $item->id) }}" method="GET">
                                                 <select name="tracking" onchange="javascript:this.form.submit();">
-                                                    <option value="{{$item->tracking}}">{{$item->tracking}}</option>
+                                                    <option value="{{ $item->tracking }}">{{ $item->tracking }}</option>
                                                     <option value="shipping">Shipping</option>
                                                     <option value="delivered">Delivered</option>
                                                 </select>
@@ -103,7 +123,7 @@
                                         </td>
                                         <td style="vertical-align:middle;">
                                             <div class="d-flex">
-                                                <p>
+                                                {{-- <p>
                                                     @if ($item->passed == 1)
                                                         <a href="#" class="btn btn-success btn-sm m-2">Passed</a>
                                                     @else
@@ -111,7 +131,7 @@
                                                             class="btn btn-primary btn-sm m-2">kitchen</a>
                                                     @endif
 
-                                                </p>
+                                                </p> --}}
 
                                                 <p><a href="{{ route('delete.item', [$item->id]) }}"
                                                         class="btn btn-danger btn-sm m-2"><i

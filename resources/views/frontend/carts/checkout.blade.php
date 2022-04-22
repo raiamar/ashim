@@ -85,7 +85,7 @@
                                 @foreach (session('cart') as $id => $item)
                                     <?php $total += $item['price'] * $item['quantity']; ?>
                                     <?php $uniqueOrderId = '#' . $id . crc32(uniqid()); ?>
-                                    <input type="hidden" name="product_details[]" value="{{ $item['id'] }}, {{ $item['name'] }}, {{$item['quantity']}}, {{ $item['price'] * $item['quantity'] }}">
+                                    <input type="hidden" name="product_details[]" value="{{ $item['id'] }}, {{ $item['name'] }}, {{$item['quantity']}}, {{ $item['price'] * $item['quantity'] }}, {{ $item['user_id'] }}">
                                     <input type="hidden" name="order_id" value="<?php echo $uniqueOrderId; ?>">
                                     <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                                     <table class="table">
