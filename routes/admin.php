@@ -50,6 +50,11 @@ Route::group(['middleware' => 'user_role', 'prefix'=> 'admin'], function(){
     Route::post('make-vendor', 'Admin\VendorRequestController@makeVendor')->name('admin.makeVendor');
 
     Route::get('mark-as-read/{noti_id}', 'Admin\NotificationController@markRead')->name('admin.markAsRead');
+
+    Route::get('profile', 'Admin\ProfileController@profile')->name('admin.getProfile');
+    Route::post('change-password', 'Admin\ProfileController@storeUserNewPassword')->name('admin.changepassword');
+    Route::post('change-email', 'Admin\ProfileController@changeEmail')->name('admin.changeEmail');
+    Route::post('change-image', 'Admin\ProfileController@changeUserImage')->name('admin.changeUserImage');
 });
 
 

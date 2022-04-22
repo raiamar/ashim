@@ -208,6 +208,12 @@
                                 </li>
                             @endif
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.getProfile') }}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    {{ __('Profile') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     <i class="far fa-circle nav-icon"></i>
