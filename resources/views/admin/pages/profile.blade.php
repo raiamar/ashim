@@ -48,7 +48,7 @@
                                         data-toggle="tab">Change Password</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#change-email"
                                         data-toggle="tab">Change
-                                        Email</a></li>
+                                        Detail</a></li>
                                 <li class="nav-item"><a class="nav-link" href="#change-image"
                                         data-toggle="tab">Change
                                         Image</a></li>
