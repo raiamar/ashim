@@ -25,6 +25,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'address',
         'password',
         'vendor_request',
+        'image',
     ];
 
     /**
@@ -45,4 +46,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getImage($img)
+    {
+        if($img != null && file_exists('uploads/avatar/'.$img)){
+            return asset('uploads/avatar/'.$img);
+        } else {
+            return asset('uploads/default.png');
+        }
+    }
 }
