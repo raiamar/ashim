@@ -48,6 +48,8 @@ Route::group(['middleware' => 'user_role', 'prefix'=> 'admin'], function(){
     // Vendor Request
     Route::get('get-vendor-requests', 'Admin\VendorRequestController@index')->name('admin.get_vendor_request');
     Route::post('make-vendor', 'Admin\VendorRequestController@makeVendor')->name('admin.makeVendor');
+
+    Route::get('mark-as-read/{noti_id}', 'Admin\NotificationController@markRead')->name('admin.markAsRead');
 });
 
 
