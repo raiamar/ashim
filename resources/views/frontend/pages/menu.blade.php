@@ -11,33 +11,38 @@
         </div>
     </div>
 
-    
+
     <section class="menus">
         <div class="container">
             <div class="row">
-                @foreach ($menu as $item)
-                    <div class="col-md-6">
-                        <div class="card p-3 mb-3">
-                            <a href="#" class="row">
-                                <div class="col-md-3">
-                                    <div class="appitizers-img"><img src="{{ asset('uploads/product/' . $item->image) }}"
-                                            height="100%" width="100px"></div>
-                                </div>
-                                <div class="col-md-9 ">
-                                    <div class="row">
-                                        <h4 class="book-title col-8">{{ $item->menu_name }}</h4>
-                                        <h6 class="text-center book-author col-4"><b>Rs.</b><span>{{ $item->price }}.00</span></h6>
+                @if (count($menu) > 0)
+                    @foreach ($menu as $item)
+                        <div class="col-md-6">
+                            <div class="card p-3 mb-3">
+                                <a href="#" class="row">
+                                    <div class="col-md-3">
+                                        <div class="appitizers-img"><img
+                                                src="{{ asset('uploads/product/' . $item->image) }}" height="100%"
+                                                width="100px"></div>
+                                    </div>
+                                    <div class="col-md-9 ">
+                                        <div class="row">
+                                            <h4 class="book-title col-8">{{ $item->menu_name }}</h4>
+                                            <h6 class="text-center book-author col-4">
+                                                <b>Rs.</b><span>{{ $item->price }}.00</span>
+                                            </h6>
 
-                                        <div class=" mb-2 ml-3">
-                                            <link rel="stylesheet"
-                                                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-                                                integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
-                                                crossorigin="anonymous" referrerpolicy="no-referrer" />
-                                            <div class="ratings stars">
-                                                @for ($i = 0; $i < 5; ++$i)
-                                                    @php
-                                                        echo '<i class="fa fa-star',
-                                                        (round($item->avgRating(),1)==$i+.1?'-o':''),
+                                            <div class=" mb-2 ml-3">
+                                                <link rel="stylesheet"
+                                                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+                                                    integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+                                                    crossorigin="anonymous" referrerpolicy="no-referrer" />
+                                                <div class="ratings stars">
+                                                    @for ($i = 0; $i < 5; ++$i)
+                                                        @php
+                                                            echo '<i class="fa fa-star',
+                                                        (round($item->avgRating(),1)==$i+.1?'-o':'')
+,
                                                         (round($item->avgRating(),1)==$i+.2?'-o':''),
                                                         (round($item->avgRating(),1)==$i+.3?'-o':''),
                                                         (round($item->avgRating(),1)==$i+.4?'-o':''),
@@ -48,107 +53,115 @@
                                                         (round($item->avgRating(),1)==$i+.9?'-half':''),
                                                         (round($item->avgRating(),1)<=$i?'-o':''),
                                                         '" aria-hidden="true"></i>';
+                                                            echo "\n";
+                                                        @endphp
+                                                    @endfor
+                                                    @php
+                                                        $totalRating = round($item->avgRating(), 1);
+                                                        echo "($totalRating)";
                                                         echo "\n";
                                                     @endphp
-                                                @endfor
-                                                @php
-                                                    $totalRating = round($item->avgRating(), 1);
-                                                    echo "($totalRating)";
-                                                    echo "\n";
-                                                @endphp
-            
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <p class="book-description">{{ Str::limit($item->description, 100) }}</p>
-                                </div>
-                            </a>
-                            <br>
 
-                            <?php $cart_product = session()->get('cart', []); ?>
-                            @if (isset($cart_product[$item->id]))
-                                <button class="btn btn-success" style="width: 30%; margin-left: 70%;">Added</button>
-                            @else
-                                <div>
-                                    @if (Auth::user())
-                                        @php
-                                            $check = \App\Models\UserOrder::where([['user_id', Auth::user()->id], ['status', 'paid']])->first();
-                                        @endphp
-
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="rateItem" tabindex="-1" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Rate Item</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-
-
-                                                    <div class="modal-body">
-                                                        <form action="{{ route('rating.submited') }}" method="POST">
-                                                            @csrf
-                                                            <input type="hidden" id="mId" name="menu_id">
-                                                            <input type="hidden" id="user_id"
-                                                                value="{{ Auth::user()->id }}" name="user_id">
-                                                            <span class="starRating">
-                                                                <input id="rating5" type="radio" name="rating" value="5"
-                                                                    onclick="javascript:this.form.submit();">
-                                                                <label for="rating5">5</label>
-                                                                <input id="rating4" type="radio" name="rating" value="4"
-                                                                    onclick="javascript:this.form.submit();">
-                                                                <label for="rating4">4</label>
-                                                                <input id="rating3" type="radio" name="rating" value="3"
-                                                                    onclick="javascript:this.form.submit();">
-                                                                <label for="rating3">3</label>
-                                                                <input id="rating2" type="radio" name="rating" value="2"
-                                                                    onclick="javascript:this.form.submit();">
-                                                                <label for="rating2">2</label>
-                                                                <input id="rating1" type="radio" name="rating" value="1"
-                                                                    onclick="javascript:this.form.submit();">
-                                                                <label for="rating1">1</label>
-                                                            </span>
-                                                        </form>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
+                                        <p class="book-description">{{ Str::limit($item->description, 100) }}</p>
+                                    </div>
+                                </a>
+                                <br>
+
+                                <?php $cart_product = session()->get('cart', []); ?>
+                                @if (isset($cart_product[$item->id]))
+                                    <button class="btn btn-success" style="width: 30%; margin-left: 70%;">Added</button>
+                                @else
+                                    <div>
+                                        @if (Auth::user())
+                                            @php
+                                                $check = \App\Models\UserOrder::where([['user_id', Auth::user()->id], ['status', 'paid']])->first();
+                                            @endphp
 
 
-                                    @if (isset($check))
-                                        <div class="d-flex">
-                                            <button style="width: 30%; margin-left: 30%;" type="button"
-                                                class="btn btn-primary ratingItem" data-toggle="modal"
-                                                data-target="#rateItem" data-id="{{ $item->id }}">
-                                                Rate Item
-                                            </button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="rateItem" tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Rate Item</h5>
+                                                            <button type="button" class="close"
+                                                                data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
 
+
+                                                        <div class="modal-body">
+                                                            <form action="{{ route('rating.submited') }}" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" id="mId" name="menu_id">
+                                                                <input type="hidden" id="user_id"
+                                                                    value="{{ Auth::user()->id }}" name="user_id">
+                                                                <span class="starRating">
+                                                                    <input id="rating5" type="radio" name="rating" value="5"
+                                                                        onclick="javascript:this.form.submit();">
+                                                                    <label for="rating5">5</label>
+                                                                    <input id="rating4" type="radio" name="rating" value="4"
+                                                                        onclick="javascript:this.form.submit();">
+                                                                    <label for="rating4">4</label>
+                                                                    <input id="rating3" type="radio" name="rating" value="3"
+                                                                        onclick="javascript:this.form.submit();">
+                                                                    <label for="rating3">3</label>
+                                                                    <input id="rating2" type="radio" name="rating" value="2"
+                                                                        onclick="javascript:this.form.submit();">
+                                                                    <label for="rating2">2</label>
+                                                                    <input id="rating1" type="radio" name="rating" value="1"
+                                                                        onclick="javascript:this.form.submit();">
+                                                                    <label for="rating1">1</label>
+                                                                </span>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endif
+
+
+                                        @if (isset($check))
+                                            <div class="d-flex">
+                                                <button style="width: 30%; margin-left: 30%;" type="button"
+                                                    class="btn btn-primary ratingItem" data-toggle="modal"
+                                                    data-target="#rateItem" data-id="{{ $item->id }}">
+                                                    Rate Item
+                                                </button>
+
+                                                <button class="btn btn-dark d-block text-uppercase"
+                                                    style="width: 30%; margin-left: 10%;"><a class="no-underline"
+                                                        href="{{ route('add.to.cart', $item->id) }}">{{ __('ADD TO CART') }}</a></button>
+                                            </div>
+                                        @else
                                             <button class="btn btn-dark d-block text-uppercase"
-                                                style="width: 30%; margin-left: 10%;"><a class="no-underline"
+                                                style="width: 30%; margin-left: 70%;"><a class="no-underline"
                                                     href="{{ route('add.to.cart', $item->id) }}">{{ __('ADD TO CART') }}</a></button>
-                                        </div>
-                                    @else
-                                        <button class="btn btn-dark d-block text-uppercase"
-                                            style="width: 30%; margin-left: 70%;"><a class="no-underline"
-                                                href="{{ route('add.to.cart', $item->id) }}">{{ __('ADD TO CART') }}</a></button>
-                                    @endif
+                                        @endif
 
-                                </div>
-                            @endif
+                                    </div>
+                                @endif
 
-                            {{-- <a href="{{ route('rate.page', $item->id) }}"> Rate</a> --}}
+                                {{-- <a href="{{ route('rate.page', $item->id) }}"> Rate</a> --}}
 
 
-                            
 
+
+                            </div>
                         </div>
+                    @endforeach
+                @else
+                    <div class="col-md-6">
+                        <div class="card p-3 mb-3 mt-5">
+                            <p>No Product Found.</p>
+                        </div>
+                       
                     </div>
-                @endforeach
+                @endif
             </div>
         </div>
         <div class="d-flex justify-content-center">
@@ -165,7 +178,6 @@
     </script>
 @stop
 <style>
-
     .stars {
         width: fit-content;
         margin: 0 auto;
