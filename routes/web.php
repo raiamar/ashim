@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VendorRequestController;
 use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +32,7 @@ Route::get('visit-shop/{id}', 'homeController@Shop')->name('visti.shop');
 
 //cart controller
 Route::get('carts', 'CartController@CartProducts')->name('carts');
+Route::match(['get', 'post'], 'compare', 'CompareController@compare')->name('compare');
 Route::get('add-to-cart/{id}', 'CartController@addTocart')->name('add.to.cart');
 Route::get('updateCart', 'CartController@updateCart')->name('update.cart');
 Route::any('remove-from-cart/{id}', 'CartController@remove_from_cart')->name('remove.from.cart');
