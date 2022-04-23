@@ -11,7 +11,7 @@ use App\Models\User;
 class homeController extends Controller
 {
     public function index(){
-        $users = User::where('role', 'vendor')->get();
+        $users = User::where('role', 'vendor')->latest()->take(4)->get();
         $items = Product::latest()->take(4)->get();
         return view('frontend.index', compact('users', 'items'));
     }
@@ -88,6 +88,12 @@ class homeController extends Controller
         }
 
 
+
+        public function Shop($id){
+            $data = Product::where('user_id', $id)->get();
+            $user = User::find($id);
+            return view('frontend.pages.shop', compact('data', 'user'));
+        }
 
 
 }
