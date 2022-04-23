@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Inquery;
 use App\Models\User;
+use App\Models\UserOrder;
+use Auth;
 
 
 class homeController extends Controller
@@ -93,6 +95,14 @@ class homeController extends Controller
             $data = Product::where('user_id', $id)->get();
             $user = User::find($id);
             return view('frontend.pages.shop', compact('data', 'user'));
+        }
+
+
+
+
+        public function UserDashboard(){
+            $data = UserOrder::where('user_id', Auth::user()->id)->first();
+            return view('frontend.layout.user-order', compact('data'));
         }
 
 

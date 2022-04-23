@@ -91,18 +91,24 @@
                             </div>
                         </li>
 
-                        @if (Auth::user()->role == 'manager' || Auth::user()->role == 'admin' || Auth::user()->role == 'vendor')
+                        @if (Auth::user()->role == 'user' || Auth::user()->role == 'admin' || Auth::user()->role == 'vendor')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
                             </li>
-                        @elseif(Auth::user()->role == 'user' && Auth::user()->vendor_request == 0)
+
+                        {{-- @elseif (Auth::user()->role == 'user') 
+                        
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.dashboard') }}">Dashboard</a>
+                        </li> --}}
+                        {{-- @elseif(Auth::user()->role == 'user' && Auth::user()->vendor_request == 0)
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('become_vendor') }}">Become a vendor</a>
                             </li>
                         @elseif(Auth::user()->role == 'user' && Auth::user()->vendor_request == 1)
                             <li class="nav-item">
                                 <a class="nav-link" href="javascript:void(0);">Requested for vendor</a>
-                            </li>
+                            </li> --}}
                         @endif
                     @else
                         <a class="nav-link" href="/login">Login</a>

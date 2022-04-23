@@ -189,6 +189,8 @@
                                     </a>
                                 </li>
                             @endif
+
+
                             @if (Auth::user()->role == 'admin')
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
@@ -208,16 +210,43 @@
                                     </ul>
                                 </li>
                             @endif
+
+                            
+
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.getProfile') }}">
                                     <i class="far fa-circle nav-icon"></i>
                                     {{ __('Profile') }}
                                 </a>
                             </li>
+
+
+                            {{-- user only --}}
+                            @if (Auth::user()->role == 'user' && Auth::user()->vendor_request == 0)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('become_vendor') }}">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        Become a vendor</a>
+                                </li>
+                            @else
+                                <li class="nav-item"> 
+                                    <a class="nav-link" href="javascript:void(0);">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        Requested for vendor</a>
+                                </li>
+                            @endif
+
+                            <li class="nav-item"> 
+                                <a class="nav-link" href="{{route('user.dashboard')}}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    My Purchase</a>
+                            </li>
+
+
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    <i class="far fa-circle nav-icon"></i>
                                     {{ __('Logout') }}
                                 </a>
 
@@ -228,11 +257,19 @@
                             </li>
                         </ul>
 
+
+
+
+
+                        
+ 
+
                     </nav>
                     <!-- /.sidebar-menu -->
                 </div>
                 <!-- /.sidebar -->
         </aside>
+
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">

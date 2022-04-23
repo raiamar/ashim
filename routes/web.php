@@ -25,6 +25,7 @@ Route::post('submit-inquery','homeController@SubmitInquery')->name('submit.inqui
 
 
 Route::get('visit-shop/{id}', 'homeController@Shop')->name('visti.shop');
+Route::get('user-dashboard', 'homeController@UserDashboard')->name('user.dashboard');
 
 
 

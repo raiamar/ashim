@@ -92,7 +92,8 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="tab-pane" id="change-email">
+
+                                <div class="tab-pane active" id="change-email">
                                     <form class="form-horizontal" method="POST" action="{{ route('admin.changeEmail') }}">
                                         @csrf
                                         <div class="form-group row">
@@ -102,13 +103,7 @@
                                                     value="{{ Auth::user()->email }}" readonly="readonly">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="email" class="col-sm-2 col-form-label">New Email</label>
-                                            <div class="col-sm-10">
-                                                <input type="email" class="form-control" name="email" id="email"
-                                                    placeholder="Enter your new email">
-                                            </div>
-                                        </div>
+                                        
                                         <div class="form-group row">
                                             <label for="email" class="col-sm-2 col-form-label">Name</label>
                                             <div class="col-sm-10">
