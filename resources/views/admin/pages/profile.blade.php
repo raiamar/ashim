@@ -37,6 +37,10 @@
                             </h3>
                             <p class="text-center"><i class="fas fa-envelope"></i> {{ Auth::user()->email }}
                             </p>
+                            <p class="text-center"><i class="fas fa-map-marker"></i> {{ Auth::user()->address }}
+                            </p>
+                            <p class="text-center"><i class="fas fa-phone"></i> {{ Auth::user()->contact }}
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -96,20 +100,6 @@
                                     <form class="form-horizontal" method="POST" action="{{ route('admin.changeEmail') }}">
                                         @csrf
                                         <div class="form-group row">
-                                            <label for="email" class="col-sm-2 col-form-label">Email</label>
-                                            <div class="col-sm-10">
-                                                <input type="email" class="form-control" id="email" placeholder="Email"
-                                                    value="{{ Auth::user()->email }}" readonly="readonly">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="email" class="col-sm-2 col-form-label">New Email</label>
-                                            <div class="col-sm-10">
-                                                <input type="email" class="form-control" name="email" id="email"
-                                                    placeholder="Enter your new email">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
                                             <label for="email" class="col-sm-2 col-form-label">Name</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="name" id="name"
@@ -124,7 +114,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="email" class="col-sm-2 col-form-label">Contact</label>
+                                            <label for="email" class="col-sm-2 col-form-label">Address</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="address" id="address"
                                                     value="{{ auth()->user()->address }}" placeholder="Enter your address">
