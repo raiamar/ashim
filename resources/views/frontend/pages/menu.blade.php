@@ -24,43 +24,43 @@
                                             height="100%" width="100px"></div>
                                 </div>
                                 <div class="col-md-9 ">
-                                    <div class="d-flex justify-content-center">
-                                        <h4 class="book-title">{{ $item->menu_name }}</h4>
-                                        <h6 class="text-center book-author"><b>Rs.</b><span>{{ $item->price }}</span></h6>
+                                    <div class="row">
+                                        <h4 class="book-title col-8">{{ $item->menu_name }}</h4>
+                                        <h6 class="text-center book-author col-4"><b>Rs.</b><span>{{ $item->price }}.00</span></h6>
+
+                                        <div class=" mb-2 ml-3">
+                                            <link rel="stylesheet"
+                                                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+                                                integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+                                                crossorigin="anonymous" referrerpolicy="no-referrer" />
+                                            <div class="ratings stars">
+                                                @for ($i = 0; $i < 5; ++$i)
+                                                    @php
+                                                        echo '<i class="fa fa-star',
+                                                        (round($item->avgRating(),1)==$i+.1?'-o':''),
+                                                        (round($item->avgRating(),1)==$i+.2?'-o':''),
+                                                        (round($item->avgRating(),1)==$i+.3?'-o':''),
+                                                        (round($item->avgRating(),1)==$i+.4?'-o':''),
+                                                        (round($item->avgRating(),1)==$i+.5?'-half':''),
+                                                        (round($item->avgRating(),1)==$i+.6?'-half':''),
+                                                        (round($item->avgRating(),1)==$i+.7?'-half':''),
+                                                        (round($item->avgRating(),1)==$i+.8?'-half':''),
+                                                        (round($item->avgRating(),1)==$i+.9?'-half':''),
+                                                        (round($item->avgRating(),1)<=$i?'-o':''),
+                                                        '" aria-hidden="true"></i>';
+                                                        echo "\n";
+                                                    @endphp
+                                                @endfor
+                                                @php
+                                                    $totalRating = round($item->avgRating(), 1);
+                                                    echo "($totalRating)";
+                                                    echo "\n";
+                                                @endphp
+            
+                                            </div>
+                                        </div>
                                     </div>
                                     <p class="book-description">{{ Str::limit($item->description, 100) }}</p>
-                                </div>
-
-                                <div class="wrap">
-                                    <link rel="stylesheet"
-                                        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-                                        integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
-                                        crossorigin="anonymous" referrerpolicy="no-referrer" />
-                                    <div class="ratings stars">
-                                        @for ($i = 0; $i < 5; ++$i)
-                                            @php
-                                                echo '<i class="fa fa-star',
-                                                (round($item->avgRating(),1)==$i+.1?'-o':''),
-                                                (round($item->avgRating(),1)==$i+.2?'-o':''),
-                                                (round($item->avgRating(),1)==$i+.3?'-o':''),
-                                                (round($item->avgRating(),1)==$i+.4?'-o':''),
-                                                (round($item->avgRating(),1)==$i+.5?'-half':''),
-                                                (round($item->avgRating(),1)==$i+.6?'-half':''),
-                                                (round($item->avgRating(),1)==$i+.7?'-half':''),
-                                                (round($item->avgRating(),1)==$i+.8?'-half':''),
-                                                (round($item->avgRating(),1)==$i+.9?'-half':''),
-                                                (round($item->avgRating(),1)<=$i?'-o':''),
-                                                '" aria-hidden="true"></i>';
-                                                echo "\n";
-                                            @endphp
-                                        @endfor
-                                        @php
-                                            $totalRating = round($item->avgRating(), 1);
-                                            echo "($totalRating)";
-                                            echo "\n";
-                                        @endphp
-
-                                    </div>
                                 </div>
                             </a>
                             <br>
@@ -87,6 +87,8 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
+
+
                                                     <div class="modal-body">
                                                         <form action="{{ route('rating.submited') }}" method="POST">
                                                             @csrf
@@ -142,6 +144,8 @@
                             {{-- <a href="{{ route('rate.page', $item->id) }}"> Rate</a> --}}
 
 
+                            
+
                         </div>
                     </div>
                 @endforeach
@@ -161,16 +165,6 @@
     </script>
 @stop
 <style>
-    .wrap {
-        width: 250px;
-        height: 0px;
-        background: #fff;
-        position: absolute;
-        top: 65%;
-        left: 82%;
-        transform: translate(-50%, -50%);
-        border-radius: 10px;
-    }
 
     .stars {
         width: fit-content;

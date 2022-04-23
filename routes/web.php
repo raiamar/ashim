@@ -24,6 +24,8 @@ Route::get('/contact','homeController@contact')->name('contact');
 Route::post('submit-inquery','homeController@SubmitInquery')->name('submit.inquiry');
 
 
+Route::get('visit-shop/{id}', 'homeController@Shop')->name('visti.shop');
+
 
 
 //cart controller
