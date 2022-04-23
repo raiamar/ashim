@@ -188,7 +188,8 @@
                                         </p>
                                     </a>
                                 </li>
-
+                            @endif
+                            @if (Auth::user()->role == 'admin')
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="nav-icon fas fa-chart-pie"></i>
@@ -240,7 +241,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Dashboard</h1>
+                            <h1 class="m-0">{{ $heading_title ?? 'Dashboard' }}</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -359,7 +360,7 @@
 
                         </style>
                     @endif
-                @elseif(Auth::user()->role == 'vendor')
+                @elseif(Auth::user()->role == 'vendor' && Request::is('admin/dashboard'))
                     <div class="row">
                         <div class="container d-cont">
                             <h4>Welcome {{ Auth::user()->name }}</h4>
