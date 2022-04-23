@@ -1,4 +1,9 @@
 <?php
+
+use App\Http\Controllers\Admin\VendorRequestController;
+use Illuminate\Support\Facades\Route;
+
+
 Route::group(['middleware' => 'user_role', 'prefix'=> 'admin'], function(){
     Route::get('dashboard', 'MainController@dashborad')->name('admin.dashboard');
     Route::get('role/{id}', 'MainController@ChangeRole')->name('change.role');
@@ -39,6 +44,17 @@ Route::group(['middleware' => 'user_role', 'prefix'=> 'admin'], function(){
     Route::post('store-category', 'ProductController@StoreCat')->name('store.category');
     Route::get('remove-category/{id}', 'ProductController@RemoveCat')->name('remove.category');
     Route::get('product-category', 'ProductController@AllCat')->name('list.category');
+
+    // Vendor Request
+    Route::get('get-vendor-requests', 'Admin\VendorRequestController@index')->name('admin.get_vendor_request');
+    Route::post('make-vendor', 'Admin\VendorRequestController@makeVendor')->name('admin.makeVendor');
+
+    Route::get('mark-as-read/{noti_id}', 'Admin\NotificationController@markRead')->name('admin.markAsRead');
+
+    Route::get('profile', 'Admin\ProfileController@profile')->name('admin.getProfile');
+    Route::post('change-password', 'Admin\ProfileController@storeUserNewPassword')->name('admin.changepassword');
+    Route::post('change-email', 'Admin\ProfileController@changeEmail')->name('admin.changeEmail');
+    Route::post('change-image', 'Admin\ProfileController@changeUserImage')->name('admin.changeUserImage');
 });
 
 

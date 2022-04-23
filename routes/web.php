@@ -1,5 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\VendorRequestController;
+use Illuminate\Notifications\DatabaseNotification;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,3 +44,6 @@ Route::get('payment-response', 'CartController@payment_response')->name('home.de
 Auth::routes(['verify' => true]);
 Route::any('logout-user', ['as' => 'logout-user', 'uses' => 'Auth\LoginController@logout']);
 
+
+
+Route::get('become-vendor', [VendorRequestController::class, 'become_vendor'])->name('become_vendor');

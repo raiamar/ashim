@@ -7,6 +7,7 @@ use App\Models\UserOrder;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -43,6 +44,7 @@ class ProductController extends Controller
         $menu-> category  = $request->cat;
         $menu-> description = $request->description;
         $menu-> price = $request->price;
+        $menu->user_id = Auth::user()->id;
 
         if($request->hasfile('image')){
             $file = $request->file('image');
@@ -69,7 +71,7 @@ class ProductController extends Controller
     public function prodShow(Product $product)
     {
         $breadcrum = "Menu Item";
-        $items = Product::orderBy('created_at', 'desc')->paginate(15);
+        $items = Product::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(15);
         return view('admin.pages.productlist',["menu"=>$items, 'breadcrum'=> $breadcrum]);
     }
 
@@ -100,7 +102,7 @@ class ProductController extends Controller
         $menu-> category  = $request->input('cat');
         $menu-> description  = $request->input('description');
         $menu-> price  = $request->input('price');
-
+        $menu->user_id = Auth::user()->id;
         if($request->hasfile('image')){
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension(); //geting image extension

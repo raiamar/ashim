@@ -13,7 +13,8 @@ class Product extends Model
         'menu_name',
         'description',
         'price',
-        'image'
+        'image',
+        'user_id',
     ];
 
 
