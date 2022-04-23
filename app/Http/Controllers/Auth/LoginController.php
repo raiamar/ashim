@@ -42,6 +42,9 @@ class LoginController extends Controller
             case 'user':
                 return '/';
                 break;    
+            case 'vendor':
+                return '/admin/profile';
+                break;    
             default :
                 return '/';
                 break;            
