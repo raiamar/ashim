@@ -91,7 +91,7 @@
                             </div>
                         </li>
 
-                        @if (Auth::user()->role == 'manager' || Auth::user()->role == 'admin')
+                        @if (Auth::user()->role == 'manager' || Auth::user()->role == 'admin' || Auth::user()->role == 'vendor')
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
                             </li>
