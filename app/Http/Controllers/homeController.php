@@ -77,11 +77,16 @@ class homeController extends Controller
 
         // }
 
-        public function menu(Product $product)
+        public function menu(Request $request)
         {
-            $items = Product::where('status',1)->paginate(6);
+            if($request->has('q')){
+                $items = Product::where('status', 1)->where('menu_name', 'LIKE', '%'.$request->q.'%')->paginate(6);
+            } else {
+                $items = Product::where('status',1)->paginate(6);
+            }
             return view('frontend.pages.menu',["menu"=>$items]);
         }
+                
 
         public function userLogin(){
             return view('frontend.pages.login');

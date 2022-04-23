@@ -53,7 +53,8 @@ header .navbar .navbar-nav .nav-item .active {
   background-color: #ff1a1a;
 }
 header .navbar .nav-link {
-  padding: 30px 25px !important;
+  padding: 30px 13px !important;
+  /* padding: 30px 25px !important; */
   color: #000 !important;
   font-weight: 700;
   font-size: 14px;

@@ -107,6 +107,12 @@
                     @else
                         <a class="nav-link" href="/login">Login</a>
                     @endIf
+                    <li class="nav-item">
+                        <form class="form-inline mt-3" action="{{ route('menu') }}" method="GET">
+                            <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search Product by Title" aria-label="Search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+                          </form>
+                    </li>
                 </ul>
             </div>
 
