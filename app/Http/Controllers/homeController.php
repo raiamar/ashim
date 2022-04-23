@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Inquery;
+use App\Models\User;
+
 
 class homeController extends Controller
 {
     public function index(){
-        return view('frontend.index');
+        $users = User::where('role', 'vendor')->get();
+        $items = Product::latest()->take(4)->get();
+        return view('frontend.index', compact('users', 'items'));
     }
 
      // homepage

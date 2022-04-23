@@ -20,7 +20,7 @@
 
 </head>
 <body>
-@yield('content')
+  @yield('content')
 </body>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -104,9 +104,6 @@
         slidesToScroll: 1
       }
     }
-    // You can unslick at a given breakpoint now by adding:
-    // settings: "unslick"
-    // instead of a settings object
   ]
     });
   </script>
