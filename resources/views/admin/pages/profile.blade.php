@@ -113,7 +113,21 @@
                                             <label for="email" class="col-sm-2 col-form-label">Name</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" name="name" id="name"
-                                                    value="{{ auth()->user()->name }}" placeholder="Enter your new email">
+                                                    value="{{ auth()->user()->name }}" placeholder="Enter your name">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="email" class="col-sm-2 col-form-label">Contact</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="contact" id="contact"
+                                                    value="{{ auth()->user()->contact }}" placeholder="Contact Number">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="email" class="col-sm-2 col-form-label">Contact</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" name="address" id="address"
+                                                    value="{{ auth()->user()->address }}" placeholder="Enter your address">
                                             </div>
                                         </div>
 

@@ -14,7 +14,7 @@ class ProfileController extends Controller
 {
     public function profile()
     {
-        return view('admin.pages.profile');
+        return view('admin.pages.profile',['heading_title' => 'Profile']);
     }
 
     public function storeUserNewPassword(Request $request)
@@ -34,8 +34,15 @@ class ProfileController extends Controller
         $this->validate($request, [
             'email' => 'required',
             'name' => 'required',
+            'contact' => 'required',
+            'address' => 'required',
         ]);
-        User::find(\auth()->user()->id)->update(['email' => $request->email, 'name' => $request->name]);
+        User::find(\auth()->user()->id)->update([
+            'email' => $request->email,
+            'name' => $request->name,
+            'contact' => $request->contact,
+            'address' => $request->address,
+        ]);
         return redirect()->back()->with('success', 'Detail changed successfully');
     }
 

@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -19,7 +20,7 @@ class ProductController extends Controller
     public function prodIndex()
     {
         $breadcrum = "Add Menu Item";
-        return view('admin.pages.product', compact('breadcrum'));
+        return view('admin.pages.product', compact('breadcrum'), ['heading_title' => 'Add Product']);
 
     }
 
@@ -37,7 +38,10 @@ class ProductController extends Controller
      */
     public function prodStore(Request $request)
     {
-        // return $request->input();
+        $validator = $this->__validation($request->all());
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
          //Insert Data into DB
         $menu = new Product;
         $menu-> menu_name  = $request->menu_name;
@@ -72,7 +76,7 @@ class ProductController extends Controller
     {
         $breadcrum = "Menu Item";
         $items = Product::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(15);
-        return view('admin.pages.productlist',["menu"=>$items, 'breadcrum'=> $breadcrum]);
+        return view('admin.pages.productlist',["menu"=>$items, 'breadcrum'=> $breadcrum, 'heading_title' => 'Product Lists']);
     }
 
     /**
@@ -97,6 +101,10 @@ class ProductController extends Controller
     public function productUpdate(Request $request)
     {
         //update Data into DB
+        $validator = $this->__validation($request->all());
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
         $menu = Product::find($request->input('id'));
         $menu-> menu_name  = $request->input('menu_name');
         $menu-> category  = $request->input('cat');
@@ -197,6 +205,23 @@ class ProductController extends Controller
         $data =  Category::find($id);
         $data->delete();
         return back()->with('success','Data removed');
+    }
+
+
+    private function __validation(array $data)
+    {
+        return Validator::make($data,[
+            'menu_name' => ['required'],
+            'cat' => ['required'],
+            'description' => ['required'],
+            'price' => ['required'],
+            'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:4096'],
+        ],[
+            'menu_name.required' => 'Product name is required',
+            'cat.required' => 'Please Select Category',
+            'description.required' => 'Description is required',
+            'price.required' => 'Price is required',
+        ]);
     }
     
     
