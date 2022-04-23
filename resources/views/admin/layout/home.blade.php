@@ -306,7 +306,7 @@
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Roles</th>
-                                    <th style="text-align: center; width: 210px">Change Role | Action</th>
+                                    <th style="text-align: center; width: 210px">Action</th>
                                 </thead>
                                 @foreach ($user as $key => $data)
                                     <tbody>
@@ -317,11 +317,11 @@
                                         <td>{{ $data->role }}</td>
                                         @if (Auth::user()->role == 'admin')
                                             <td class="d-flex">
-                                                <form action="{{ route('change.role', $data->id) }}" method="GET">
+                                                {{-- <form action="{{ route('change.role', $data->id) }}" method="GET">
                                                     <input type="hidden" name="role" value="role">
                                                     <button class="btn btn-primary ml-2"
                                                         onclick="javascript:this.form.submit();">Change Role</button>
-                                                </form>
+                                                </form> --}}
 
                                                 <a href="{{ route('remove.user', $data->id) }}"
                                                     class="btn btn-danger ml-2"> <i class="fa fa-trash"></i> </a>

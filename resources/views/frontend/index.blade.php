@@ -47,7 +47,7 @@
             @foreach ($users as $item)
                 <div class="col-3">
                     <div class="card">
-                        <img class="card-img-top" src="{{ asset('uploads/product/' . $item->image) }}">
+                        <img class="card-img-top" src="{{ asset('uploads/avatar/' . $item->image) }}">
                         <div class="card-body">
                             <p class="card-text text-center">{{ $item->name }}</p>
                             <p class="card-text text-center">{{ $item->address }}</p>
@@ -60,6 +60,6 @@
   </section>
 
     <style>
-      .latest-helmates img{height: 220px}
+      .latest-helmates img{height: 220px; object-fit: cover;}
     </style>
 @endsection
