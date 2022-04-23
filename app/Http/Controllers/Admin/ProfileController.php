@@ -32,13 +32,11 @@ class ProfileController extends Controller
     public function changeEmail(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required',
             'name' => 'required',
             'contact' => 'required',
             'address' => 'required',
         ]);
         User::find(\auth()->user()->id)->update([
-            'email' => $request->email,
             'name' => $request->name,
             'contact' => $request->contact,
             'address' => $request->address,

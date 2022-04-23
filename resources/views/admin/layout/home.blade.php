@@ -189,7 +189,7 @@
                                     </a>
                                 </li>
                             @endif
-                            @if (Auth::user()->role == 'admin')
+                            {{-- @if (Auth::user()->role == 'admin')
                                 <li class="nav-item">
                                     <a href="#" class="nav-link">
                                         <i class="nav-icon fas fa-chart-pie"></i>
@@ -207,7 +207,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                            @endif
+                            @endif --}}
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('admin.getProfile') }}">
                                     <i class="far fa-circle nav-icon"></i>
