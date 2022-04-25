@@ -25,7 +25,7 @@
 
                 <td class="template_price">Rs {{ $item['price'] * $item['quantity'] }}.00</td>
 
-                <td> <input type="number" onchange="updateCart({{$item['id']}})" min="1" name="quantity" value="{{ $item['quantity'] }}" style="width: 15%"> </td>
+                <td> <input type="number" onchange="updateCart({{$item['id']}}, $(this).val())" min="1" name="quantity" value="{{ $item['quantity'] }}"> </td>
 
                 <td class="actions" data-th="">
                     <a type="button" href="{{ route('remove.from.cart', $item['id']) }}" class="p-1 text-center remove-from-cart" data-toggle="tooltip"

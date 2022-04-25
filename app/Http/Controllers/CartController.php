@@ -54,11 +54,10 @@ class CartController extends Controller
 
 
     public function updateCart(Request $request){
-       
         if ($request->product_id) {
             $cart = session()->get('cart');
             $qty = $cart[$request->product_id]['quantity'];
-            $cart[$request->product_id]["quantity"] = $qty + 1;
+            $cart[$request->product_id]["quantity"] = $request->qty;
             session()->put('cart', $cart);
             // session()->flash('success', 'Cart updated successfully');
             return view('frontend.carts.updatecart');
